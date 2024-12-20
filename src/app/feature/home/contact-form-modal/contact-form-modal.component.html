@@ -1,0 +1,57 @@
+<div class="p-5">
+  <h2 class="text-center font-bold">{{ data.modalTitle}}</h2>
+  <mat-dialog-content>
+    <form [formGroup]="contactForm">
+      <!-- First Name -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" />
+        @if (contactForm.get('firstName')?.hasError('required')) {
+          <mat-error>First Name is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" />
+        @if (contactForm.get('lastName')?.hasError('required')) {
+          <mat-error>Last Name is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+        @if (contactForm.get('email')?.hasError('required')) {
+          <mat-error>Email is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Phone Number -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber" />
+        @if (contactForm.get('phoneNumber')?.hasError('required')) {
+          <mat-error>Phone Number is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Physical Address -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Physical Address</mat-label>
+        <input matInput formControlName="physicalAddress" />
+        @if (contactForm.get('physicalAddress')?.hasError('required')) {
+          <mat-error>Physical Address is required</mat-error>
+        }
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button mat-dialog-close cdkFocusInitial [disabled]="!isFormUpdate()" >{{ data.submitButtonLabel }}</button>
+  </mat-dialog-actions>
+</div>
+
