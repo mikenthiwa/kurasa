@@ -1,0 +1,10 @@
+<section class="mb-8">
+  <app-toggle [viewTypes]="viewTypes()" [activeViewType]="activeViewType()"  (toggleViewType)="toggleViewType($event)" />
+</section>
+<section>
+  @if(activeViewType().value === 'grid') {
+    <app-contact-grid-view [contacts]="contacts()" />
+  } @else {
+    <app-contact-list-view [contacts]="contacts()" />
+  }
+</section>

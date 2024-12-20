@@ -1,0 +1,13 @@
+<div class="flex border-2 rounded-md justify-between w-1/2 cursor-pointer border-primary">
+  @for (type of viewTypes(); track type) {
+    <div
+      class="w-1/2 text-center py-2"
+      (click)="toggleViewType.emit(type)"
+      [ngClass]="activeViewType().value === type.value? 'bg-primary text-secondary-100' : ''"
+      (keydown.enter)=toggleViewType.emit(type)
+      tabindex="0"
+    >
+      {{ type.label | titlecase }}
+    </div>
+  }
+</div>

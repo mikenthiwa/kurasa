@@ -1,0 +1,7 @@
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+  @for (contact of contacts(); track contact) {
+    <div class="w-full">
+      <app-contact-card [contact]="contact"></app-contact-card>
+    </div>
+  }
+</div>
