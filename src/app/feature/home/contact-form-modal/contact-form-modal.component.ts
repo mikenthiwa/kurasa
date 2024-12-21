@@ -7,6 +7,7 @@ import {
   inject,
   OnInit,
   signal,
+  WritableSignal,
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,11 +44,11 @@ export class ContactFormModalComponent implements OnInit {
     }
   ) {}
 
-  isFormUpdate = signal(false);
-  submitModal: OutputEmitterRef<never> = output<never>();
+  isFormUpdate: WritableSignal<boolean> = signal<boolean>(false);
+  submitModal: OutputEmitterRef<Contact> = output<Contact>();
 
   contactForm: FormGroup = new FormGroup({});
-  private fb = inject(FormBuilder);
+  private fb: FormBuilder = inject(FormBuilder);
 
   ngOnInit() {
     this.initForm();
@@ -56,11 +57,11 @@ export class ContactFormModalComponent implements OnInit {
 
   initForm() {
     this.contactForm = this.fb.group({
-      firstName: [this.data.formData?.firstName, Validators.required],
-      lastName: [this.data.formData?.lastName, Validators.required],
-      email: [this.data.formData?.email, Validators.required],
-      phoneNumber: [this.data.formData?.phoneNumber, Validators.required],
-      physicalAddress: [this.data.formData?.physicalAddress, Validators.required],
+      firstName: [this.data.formData?.firstName, [Validators.required, Validators.maxLength(50)]],
+      lastName: [this.data.formData?.lastName, [Validators.required, Validators.maxLength(50)]],
+      email: [this.data.formData?.email, [Validators.required, Validators.email]],
+      phoneNumber: [this.data.formData?.phoneNumber, [Validators.required, Validators.maxLength(15)]],
+      physicalAddress: [this.data.formData?.physicalAddress, [Validators.required, Validators.maxLength(100)]],
     });
   }
 
@@ -68,5 +69,9 @@ export class ContactFormModalComponent implements OnInit {
     this.contactForm.valueChanges.subscribe(() => {
       this.isFormUpdate.set(true);
     });
+  }
+
+  submit() {
+    this.submitModal.emit({ ...this.contactForm.value, id: this.data.formData?.id });
   }
 }

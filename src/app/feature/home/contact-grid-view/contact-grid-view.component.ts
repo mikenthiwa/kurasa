@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ContactCardComponent } from '../../../ui/contact-card/contact-card.component';
 import { Contact } from '../../../core/home/models/contact.model';
@@ -11,5 +11,7 @@ import { Contact } from '../../../core/home/models/contact.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactGridViewComponent {
-  contacts = input.required<Contact[] | undefined>();
+  contacts: InputSignal<Contact[] | undefined> = input.required<Contact[] | undefined>();
+  viewContact: OutputEmitterRef<Contact> = output<Contact>();
+  deleteContact: OutputEmitterRef<Contact> = output<Contact>();
 }

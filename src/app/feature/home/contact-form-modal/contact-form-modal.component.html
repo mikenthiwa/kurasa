@@ -1,5 +1,5 @@
 <div class="p-5">
-  <h2 class="text-center font-bold">{{ data.modalTitle}}</h2>
+  <h2 class="text-center font-bold">{{ data.modalTitle }}</h2>
   <mat-dialog-content>
     <form [formGroup]="contactForm">
       <!-- First Name -->
@@ -47,11 +47,11 @@
         }
       </mat-form-field>
     </form>
-
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button mat-dialog-close>Close</button>
-    <button mat-button mat-dialog-close cdkFocusInitial [disabled]="!isFormUpdate()" >{{ data.submitButtonLabel }}</button>
+    <button mat-button mat-dialog-close cdkFocusInitial [disabled]="!isFormUpdate()" (click)="submit()">
+      {{ data.submitButtonLabel }}
+    </button>
   </mat-dialog-actions>
 </div>
-

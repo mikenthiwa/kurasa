@@ -1,7 +1,11 @@
 <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
   @for (contact of contacts(); track contact) {
     <div class="w-full">
-      <app-contact-card [contact]="contact"></app-contact-card>
+      <app-contact-card
+        [contact]="contact"
+        (viewContact)="viewContact.emit($event)"
+        (deleteContact)="deleteContact.emit($event)"
+      />
     </div>
   }
 </div>

@@ -8,9 +8,8 @@ describe('ContactGridViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ContactGridViewComponent]
-    })
-    .compileComponents();
+      imports: [ContactGridViewComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ContactGridViewComponent);
     component = fixture.componentInstance;

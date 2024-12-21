@@ -1,10 +1,27 @@
-<section class="mb-8">
-  <app-toggle [viewTypes]="viewTypes()" [activeViewType]="activeViewType()"  (toggleViewType)="toggleViewType($event)" />
+<section class="mb-8 md:flex md:justify-between">
+  <div class="mb-5 md:w-1/2">
+    <app-toggle
+      [viewTypes]="viewTypes()"
+      [activeViewType]="activeViewType()"
+      (toggleViewType)="toggleViewType($event)"
+    />
+  </div>
+  <div class="md:w-1/2 flex justify-start md:justify-end">
+    <app-custom-search (searchTerm)="searchContact($event)"></app-custom-search>
+  </div>
 </section>
 <section>
-  @if(activeViewType().value === 'grid') {
-    <app-contact-grid-view [contacts]="contacts()" />
+  @if (activeViewType().value === 'grid') {
+    <app-contact-grid-view
+      [contacts]="(contacts | async) ?? []"
+      (viewContact)="viewContact($event)"
+      (deleteContact)="deleteContact($event)"
+    />
   } @else {
-    <app-contact-list-view [contacts]="contacts()" />
+    <app-contact-list-view
+      [contacts]="(contacts | async) ?? []"
+      (viewContact)="viewContact($event)"
+      (deleteContact)="deleteContact($event)"
+    />
   }
 </section>
