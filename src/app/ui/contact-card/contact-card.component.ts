@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { Contact } from '../../core/home/models/contact.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,5 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactCardComponent {
-  contact = input.required<Contact>();
+  contact: InputSignal<Contact> = input.required<Contact>();
+  viewContact: OutputEmitterRef<Contact> = output<Contact>();
+  deleteContact: OutputEmitterRef<Contact> = output<Contact>();
+
+  onDelete(event: MouseEvent): void {
+    event.stopPropagation();
+    this.deleteContact.emit(this.contact());
+  }
 }

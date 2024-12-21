@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  InputSignal,
-  output,
-  OutputEmitterRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,10 +9,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleComponent {
-  viewTypes: InputSignal<{ label: string; value: 'grid' | 'list' }[]> =
-    input.required();
-  activeViewType: InputSignal<{ label: string; value: 'grid' | 'list' }> =
-    input.required();
-  toggleViewType: OutputEmitterRef<{ label: string; value: 'grid' | 'list' }> =
-    output();
+  viewTypes: InputSignal<{ label: string; value: 'grid' | 'list' }[]> = input.required();
+  activeViewType: InputSignal<{ label: string; value: 'grid' | 'list' }> = input.required();
+  toggleViewType: OutputEmitterRef<{ label: string; value: 'grid' | 'list' }> = output();
 }

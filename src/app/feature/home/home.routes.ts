@@ -6,10 +6,7 @@ export default [
     children: [
       {
         path: '',
-        loadComponent: () =>
-          import('./home-page/home-page.component').then(
-            (m) => m.HomePageComponent
-          ),
+        loadComponent: () => import('./home-page/home-page.component').then((m) => m.HomePageComponent),
       },
     ],
   },

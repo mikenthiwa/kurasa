@@ -1,9 +1,10 @@
 export interface Contact {
-  id: string;
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
   phoneNumber: string;
   contactImage: string;
   physicalAddress: string;
+  isDeleted: boolean;
 }
