@@ -1,3 +1,5 @@
+export type name = 'Family' | 'Friend' | 'Work' | 'Other' | '';
+
 export interface Contact {
   id: number;
   firstName: string;
@@ -7,4 +9,5 @@ export interface Contact {
   contactImage: string;
   physicalAddress: string;
   isDeleted: boolean;
+  category: name;
 }

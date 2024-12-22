@@ -10,8 +10,11 @@
     <app-custom-search (searchTerm)="searchContact($event)"></app-custom-search>
   </div>
 </section>
-@if (homeService.selectedContacts().length > 0) {
-  <button mat-flat-button (click)="deleteSelectedContacts()">Delete</button>
+<section>
+    <app-group-folder [folderList]="(contactGroups | async) ?? []" (selectFolder)="groupContactsByCategory($event)" />
+</section>
+@if (homeService.selectedContacts().length > 0 && ((contacts | async) ?? []).length > 0) {
+  <button class="mt-3" mat-flat-button (click)="deleteSelectedContacts()">Delete</button>
 }
 <section class="overflow-y-auto max-h-96 md:max-h-max">
   @if (activeViewType().value === 'grid') {

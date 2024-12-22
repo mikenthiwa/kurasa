@@ -1,0 +1,17 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>group</mat-icon>
+        <span>Group</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    @for (folder of folderList(); track folder) {
+      <mat-list-item (click)="onSelectFolder(folder)" >
+        <mat-icon matListItemIcon>folder</mat-icon>
+        <h3 matListItemTitle>{{ folder.name }}</h3>
+      </mat-list-item>
+    }
+    <mat-checkbox [checked]="checked()" (change)="onSelectFolder({name: ''})">All</mat-checkbox>
+  </mat-expansion-panel>
+</mat-accordion>

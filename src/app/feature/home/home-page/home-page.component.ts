@@ -14,6 +14,9 @@ import { ContactFormModalComponent } from '../contact-form-modal/contact-form-mo
 import { CustomModalComponent } from '../../../ui/custom-modal/custom-modal.component';
 import { CustomSearchComponent } from '../custom-search/custom-search.component';
 import { ContactListViewComponent } from '../contact-list-view/contact-list-view.component';
+import { Folder } from '../../../core/home/models/folder.model';
+import { GroupFolderComponent } from '../group-folder/group-folder.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home-page',
@@ -24,6 +27,8 @@ import { ContactListViewComponent } from '../contact-list-view/contact-list-view
     CustomSearchComponent,
     ContactListViewComponent,
     MatButton,
+    GroupFolderComponent,
+    MatIconModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -33,7 +38,9 @@ export class HomePageComponent {
   homeService: HomeService = inject(HomeService);
   private dialog = inject(MatDialog);
 
-  contacts: Observable<Contact[]> = this.homeService.getContacts$();
+  contacts: Observable<Contact[]> = this.homeService.getActiveContacts$();
+  contactGroups: Observable<Folder[]> = this.homeService.getFolders$();
+
   viewTypes: WritableSignal<ViewTypeModel[]> = signal([
     { label: 'List', value: 'list' },
     { label: 'Grid', value: 'grid' },
@@ -78,5 +85,9 @@ export class HomePageComponent {
 
   searchContact(searchTerm: string) {
     this.contacts = this.homeService.searchContacts(searchTerm);
+  }
+
+  groupContactsByCategory(folder: Folder) {
+    this.homeService.groupContactsByCategory(folder);
   }
 }

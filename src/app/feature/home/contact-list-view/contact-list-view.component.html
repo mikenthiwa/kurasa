@@ -1,5 +1,7 @@
 <mat-selection-list aria-labelledby="contact" #allSelected multiple>
-  <mat-list-option togglePosition="before" (click)="selectAll()">All</mat-list-option>
+  @if(contacts().length > 0) {
+    <mat-list-option togglePosition="before" (click)="selectAll()">All</mat-list-option>
+  }
   @for (contact of contacts(); track contact.id) {
     <mat-list-option togglePosition="before" (selectedChange)="select(contact)">
       <h3 matLine tabindex="0" (click)="onViewContact($event, contact)" (keydown.enter)="viewContact.emit(contact)">

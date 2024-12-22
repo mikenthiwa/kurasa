@@ -6,8 +6,6 @@ import {
   output,
   OutputEmitterRef,
   ViewChild,
-  WritableSignal,
-  signal,
   inject,
 } from '@angular/core';
 import { MatListModule, MatSelectionList } from '@angular/material/list';
@@ -28,8 +26,6 @@ export class ContactListViewComponent {
   viewContact: OutputEmitterRef<Contact> = output<Contact>();
   deleteContact: OutputEmitterRef<Contact> = output<Contact>();
 
-  selectedContacts: WritableSignal<Contact[]> = signal([]);
-
   @ViewChild('allSelected', { static: true }) private allSelected: MatSelectionList = new MatSelectionList();
   private homeService = inject(HomeService);
 
@@ -45,6 +41,7 @@ export class ContactListViewComponent {
     } else {
       this.allSelected.selectAll();
       this.homeService.selectedContacts.set(this.contacts());
+      this.homeService.groupContactsByCategory({ name: '' });
     }
   }
 
