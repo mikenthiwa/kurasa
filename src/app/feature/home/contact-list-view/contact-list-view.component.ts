@@ -33,6 +33,10 @@ export class ContactListViewComponent {
     event.stopPropagation();
     this.viewContact.emit(contact);
   }
+  setFavourite(event: MouseEvent, contact: Contact): void {
+    event.stopPropagation();
+    this.homeService.setFavourite(contact);
+  }
   selectAll(): void {
     const allSelected = this.allSelected.selectedOptions.selected.length === this.contacts()?.length;
     if (allSelected) {

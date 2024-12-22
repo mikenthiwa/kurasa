@@ -11,6 +11,7 @@ export const contacts: Contact[] = [
     physicalAddress: '123 Elm Street, Springfield, USA',
     isDeleted: false,
     category: 'Family',
+    isFavorite: false,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const contacts: Contact[] = [
     physicalAddress: '456 Oak Avenue, Greenfield, USA',
     isDeleted: false,
     category: 'Friend',
+    isFavorite: false,
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ export const contacts: Contact[] = [
     physicalAddress: '789 Pine Road, Lakeview, USA',
     isDeleted: false,
     category: 'Family',
+    isFavorite: false,
   },
   {
     id: 4,
@@ -44,6 +47,7 @@ export const contacts: Contact[] = [
     physicalAddress: '321 Maple Lane, Rivertown, USA',
     isDeleted: false,
     category: 'Friend',
+    isFavorite: false,
   },
   {
     id: 5,
@@ -55,6 +59,7 @@ export const contacts: Contact[] = [
     physicalAddress: '654 Birch Court, Mountainview, USA',
     isDeleted: false,
     category: 'Work',
+    isFavorite: false,
   },
   {
     id: 6,
@@ -66,6 +71,7 @@ export const contacts: Contact[] = [
     physicalAddress: '987 Cherry Street, Plainfield, USA',
     isDeleted: false,
     category: 'Work',
+    isFavorite: false,
   },
   {
     id: 7,
@@ -77,6 +83,7 @@ export const contacts: Contact[] = [
     physicalAddress: '111 Cedar Avenue, Hillside, USA',
     isDeleted: false,
     category: 'Other',
+    isFavorite: false,
   },
   {
     id: 8,
@@ -88,6 +95,7 @@ export const contacts: Contact[] = [
     physicalAddress: '222 Spruce Road, Valleyview, USA',
     isDeleted: false,
     category: 'Other',
+    isFavorite: false,
   },
   {
     id: 9,
@@ -99,6 +107,7 @@ export const contacts: Contact[] = [
     physicalAddress: '333 Willow Street, Brookfield, USA',
     isDeleted: false,
     category: 'Family',
+    isFavorite: false,
   },
   {
     id: 10,
@@ -110,5 +119,6 @@ export const contacts: Contact[] = [
     physicalAddress: '444 Aspen Lane, Ridgewood, USA',
     isDeleted: false,
     category: 'Friend',
+    isFavorite: false,
   },
 ];

@@ -6,24 +6,30 @@
       (toggleViewType)="toggleViewType($event)"
     />
   </div>
-  <div class="md:w-1/2 flex justify-start md:justify-end">
+  <div class="w-full md:w-1/2 flex md:justify-end">
     <app-custom-search (searchTerm)="searchContact($event)"></app-custom-search>
   </div>
 </section>
-<section>
-    <app-group-folder [folderList]="(contactGroups | async) ?? []" (selectFolder)="groupContactsByCategory($event)" />
+
+<section class="mb-3">
+  <app-group-folder [folderList]="(contactGroups | async) ?? []" (selectFolder)="groupContactsByCategory($event)" />
 </section>
 @if (homeService.selectedContacts().length > 0 && ((contacts | async) ?? []).length > 0) {
   <button class="mt-3" mat-flat-button (click)="deleteSelectedContacts()">Delete</button>
 }
-<section class="overflow-y-auto max-h-96 md:max-h-max">
-  @if (activeViewType().value === 'grid') {
-    <app-contact-grid-view
-      [contacts]="(contacts | async) ?? []"
-      (viewContact)="viewContact($event)"
-      (deleteContact)="deleteContact($event)"
-    />
-  } @else {
-    <app-contact-list-view [contacts]="(contacts | async) ?? []" (viewContact)="viewContact($event)" />
-  }
-</section>
+<mat-tab-group>
+  <mat-tab label="contact">
+    <section class="overflow-y-auto max-h-96 md:max-h-max">
+      @if (activeViewType().value === 'grid') {
+        <app-contact-grid-view
+          [contacts]="(contacts | async) ?? []"
+          (viewContact)="viewContact($event)"
+          (deleteContact)="deleteContact($event)"
+        />
+      } @else {
+        <app-contact-list-view [contacts]="(contacts | async) ?? []" (viewContact)="viewContact($event)" />
+      }
+    </section>
+  </mat-tab>
+  <mat-tab label="favourite"></mat-tab>
+</mat-tab-group>
