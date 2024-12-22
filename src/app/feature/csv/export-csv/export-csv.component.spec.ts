@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupFolderComponent } from './group-folder.component';
+import { ExportCsvComponent } from './export-csv.component';
 
-describe('GroupFolderComponent', () => {
-  let component: GroupFolderComponent;
-  let fixture: ComponentFixture<GroupFolderComponent>;
+describe('ExportCsvComponent', () => {
+  let component: ExportCsvComponent;
+  let fixture: ComponentFixture<ExportCsvComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GroupFolderComponent],
+      imports: [ExportCsvComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GroupFolderComponent);
+    fixture = TestBed.createComponent(ExportCsvComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

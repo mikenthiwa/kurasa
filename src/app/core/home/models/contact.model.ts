@@ -10,4 +10,5 @@ export interface Contact {
   physicalAddress: string;
   isDeleted: boolean;
   category: name;
+  isFavorite: boolean;
 }

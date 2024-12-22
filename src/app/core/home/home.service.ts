@@ -12,11 +12,20 @@ import { folders } from './mocks/folders';
 export class HomeService {
   contacts: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>(contacts);
   contactGroups: BehaviorSubject<Folder[]> = new BehaviorSubject<Folder[]>(folders);
+  favouriteContacts: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>([]);
   filteredContacts: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>(contacts);
   selectedContacts: WritableSignal<Contact[]> = signal<Contact[]>([]);
 
   getActiveContacts$(): Observable<Contact[]> {
     return this.filteredContacts.asObservable().pipe(map((contacts) => contacts.filter((c) => !c.isDeleted)));
+  }
+
+  getAllContacts$(): Observable<Contact[]> {
+    return this.contacts.asObservable();
+  }
+
+  getFavouriteContacts$(): Observable<Contact[]> {
+    return this.favouriteContacts.asObservable();
   }
 
   getFolders$(): Observable<Folder[]> {
@@ -25,6 +34,19 @@ export class HomeService {
 
   updateContact(contact: Contact) {
     this.filteredContacts.next(this.filteredContacts.value.map((c) => (c.id === contact.id ? contact : c)));
+  }
+
+  setFavourite(contact: Contact) {
+    const index = this.filteredContacts.value.findIndex((c) => c.isFavorite === contact.isFavorite);
+    if (index > -1) {
+      this.filteredContacts.next(
+        this.filteredContacts.value.map((c) => (c.id === contact.id ? { ...c, isFavorite: !c.isFavorite } : c))
+      );
+    } else {
+      this.filteredContacts.next(
+        this.filteredContacts.value.map((c) => (c.id === contact.id ? { ...c, isFavorite: true } : c))
+      );
+    }
   }
 
   deleteContact(contact: Contact) {

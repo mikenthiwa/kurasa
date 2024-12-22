@@ -1,12 +1,17 @@
 <mat-selection-list aria-labelledby="contact" #allSelected multiple>
-  @if(contacts().length > 0) {
+  @if (contacts().length > 0) {
     <mat-list-option togglePosition="before" (click)="selectAll()">All</mat-list-option>
   }
   @for (contact of contacts(); track contact.id) {
     <mat-list-option togglePosition="before" (selectedChange)="select(contact)">
-      <h3 matLine tabindex="0" (click)="onViewContact($event, contact)" (keydown.enter)="viewContact.emit(contact)">
-        {{ contact.firstName }} {{ contact.lastName }}
-      </h3>
+      <div class="flex justify-between">
+        <h3 matLine tabindex="0" (click)="onViewContact($event, contact)" (keydown.enter)="viewContact.emit(contact)">
+          {{ contact.firstName }} {{ contact.lastName }}
+        </h3>
+        <mat-icon (click)="setFavourite($event, contact)" [class]="contact.isFavorite ? 'fav-active' : 'fav-inactive'"
+          >star</mat-icon
+        >
+      </div>
     </mat-list-option>
   }
 </mat-selection-list>

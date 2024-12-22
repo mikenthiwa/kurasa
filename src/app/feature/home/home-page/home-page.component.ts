@@ -17,6 +17,7 @@ import { ContactListViewComponent } from '../contact-list-view/contact-list-view
 import { Folder } from '../../../core/home/models/folder.model';
 import { GroupFolderComponent } from '../group-folder/group-folder.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-home-page',
@@ -29,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButton,
     GroupFolderComponent,
     MatIconModule,
+    MatTabsModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
