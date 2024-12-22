@@ -1,4 +1,4 @@
-<section class="mb-8 md:flex md:justify-between">
+<section class="md:flex md:justify-between">
   <div class="mb-5 md:w-1/2">
     <app-toggle
       [viewTypes]="viewTypes()"
@@ -10,7 +10,10 @@
     <app-custom-search (searchTerm)="searchContact($event)"></app-custom-search>
   </div>
 </section>
-<section>
+@if (homeService.selectedContacts().length > 0) {
+  <button mat-flat-button (click)="deleteSelectedContacts()">Delete</button>
+}
+<section class="overflow-y-auto max-h-96 md:max-h-max">
   @if (activeViewType().value === 'grid') {
     <app-contact-grid-view
       [contacts]="(contacts | async) ?? []"
@@ -18,10 +21,6 @@
       (deleteContact)="deleteContact($event)"
     />
   } @else {
-    <app-contact-list-view
-      [contacts]="(contacts | async) ?? []"
-      (viewContact)="viewContact($event)"
-      (deleteContact)="deleteContact($event)"
-    />
+    <app-contact-list-view [contacts]="(contacts | async) ?? []" (viewContact)="viewContact($event)" />
   }
 </section>

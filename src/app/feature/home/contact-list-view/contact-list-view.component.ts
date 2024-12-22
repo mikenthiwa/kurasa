@@ -1,83 +1,62 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   input,
   InputSignal,
-  OnChanges,
   output,
   OutputEmitterRef,
-  signal,
   ViewChild,
+  WritableSignal,
+  signal,
   inject,
 } from '@angular/core';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatListModule, MatSelectionList } from '@angular/material/list';
 import { Contact } from '../../../core/home/models/contact.model';
-
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatLine } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { HomeService } from '../../../core/home/home.service';
 
 @Component({
   selector: 'app-contact-list-view',
-  imports: [MatTableModule, MatCheckboxModule, MatIconModule, MatButtonModule, MatSortModule],
+  imports: [MatListModule, MatLine, MatIconModule],
   templateUrl: './contact-list-view.component.html',
   styleUrl: './contact-list-view.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactListViewComponent implements OnChanges, AfterViewInit {
-  contacts: InputSignal<Contact[] | undefined> = input<Contact[]>();
+export class ContactListViewComponent {
+  contacts: InputSignal<Contact[]> = input.required<Contact[]>();
   viewContact: OutputEmitterRef<Contact> = output<Contact>();
   deleteContact: OutputEmitterRef<Contact> = output<Contact>();
-  displayedColumns: string[] = [
-    'select',
-    'id',
-    'firstName',
-    'lastName',
-    'email',
-    'phoneNumber',
-    'physicalAddress',
-    'actions',
-  ];
-  dataSource = new MatTableDataSource<Contact>(this.contacts());
-  initialSelection = signal([]);
-  allowMultiSelect = signal(true);
 
-  private _liveAnnouncer = inject(LiveAnnouncer);
+  selectedContacts: WritableSignal<Contact[]> = signal([]);
 
-  @ViewChild(MatSort) sort: MatSort = new MatSort();
+  @ViewChild('allSelected', { static: true }) private allSelected: MatSelectionList = new MatSelectionList();
+  private homeService = inject(HomeService);
 
-  selection = new SelectionModel<Contact>(this.allowMultiSelect(), this.initialSelection());
-
-  ngOnChanges() {
-    this.dataSource = new MatTableDataSource<Contact>(this.contacts());
+  onViewContact(event: MouseEvent, contact: Contact): void {
+    event.stopPropagation();
+    this.viewContact.emit(contact);
   }
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
-
-  announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+  selectAll(): void {
+    const allSelected = this.allSelected.selectedOptions.selected.length === this.contacts()?.length;
+    if (allSelected) {
+      this.allSelected.deselectAll();
+      this.homeService.selectedContacts.set([]);
     } else {
-      this._liveAnnouncer.announce('Sorting cleared');
+      this.allSelected.selectAll();
+      this.homeService.selectedContacts.set(this.contacts());
     }
   }
 
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  toggleAllRows() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
+  select(contact: Contact) {
+    const selectedContacts = this.homeService.selectedContacts();
+    const index = selectedContacts.findIndex((selectedContact) => selectedContact.id === contact.id);
+    if (index > -1) {
+      this.homeService.selectedContacts.update((contacts) =>
+        contacts.filter((selectedContact) => selectedContact.id !== contact.id)
+      );
     } else {
-      this.dataSource.data.forEach((row: Contact) => this.selection.select(row));
+      this.homeService.selectedContacts.update((contacts) => [...contacts, contact]);
     }
   }
 }
