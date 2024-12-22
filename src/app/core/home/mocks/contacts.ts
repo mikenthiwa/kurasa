@@ -10,6 +10,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=John+Doe',
     physicalAddress: '123 Elm Street, Springfield, USA',
     isDeleted: false,
+    category: 'Family',
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=Jane+Smith',
     physicalAddress: '456 Oak Avenue, Greenfield, USA',
     isDeleted: false,
+    category: 'Friend',
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=Michael+Johnson',
     physicalAddress: '789 Pine Road, Lakeview, USA',
     isDeleted: false,
+    category: 'Family',
   },
   {
     id: 4,
@@ -40,6 +43,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=Emily+Davis',
     physicalAddress: '321 Maple Lane, Rivertown, USA',
     isDeleted: false,
+    category: 'Friend',
   },
   {
     id: 5,
@@ -50,6 +54,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=William+Brown',
     physicalAddress: '654 Birch Court, Mountainview, USA',
     isDeleted: false,
+    category: 'Work',
   },
   {
     id: 6,
@@ -60,6 +65,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=Sophia+Wilson',
     physicalAddress: '987 Cherry Street, Plainfield, USA',
     isDeleted: false,
+    category: 'Work',
   },
   {
     id: 7,
@@ -70,6 +76,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=James+Taylor',
     physicalAddress: '111 Cedar Avenue, Hillside, USA',
     isDeleted: false,
+    category: 'Other',
   },
   {
     id: 8,
@@ -80,6 +87,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=Isabella+Moore',
     physicalAddress: '222 Spruce Road, Valleyview, USA',
     isDeleted: false,
+    category: 'Other',
   },
   {
     id: 9,
@@ -90,6 +98,7 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=Daniel+Martinez',
     physicalAddress: '333 Willow Street, Brookfield, USA',
     isDeleted: false,
+    category: 'Family',
   },
   {
     id: 10,
@@ -100,5 +109,6 @@ export const contacts: Contact[] = [
     contactImage: 'https://via.placeholder.com/150?text=Olivia+Anderson',
     physicalAddress: '444 Aspen Lane, Ridgewood, USA',
     isDeleted: false,
+    category: 'Friend',
   },
 ];
