@@ -3,7 +3,7 @@ import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { inject } from '@angular/core';
 
-import { ContactListViewComponent } from '../contact-list-view/contact-list-view.component';
+import { MatButton } from '@angular/material/button';
 import { HomeService } from '../../../core/home/home.service';
 import { Contact } from '../../../core/home/models/contact.model';
 import { ViewTypeModel } from '../../../core/home/models/view-type.model';
@@ -13,16 +13,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { ContactFormModalComponent } from '../contact-form-modal/contact-form-modal.component';
 import { CustomModalComponent } from '../../../ui/custom-modal/custom-modal.component';
 import { CustomSearchComponent } from '../custom-search/custom-search.component';
+import { ContactListViewComponent } from '../contact-list-view/contact-list-view.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [ContactListViewComponent, ToggleComponent, ContactGridViewComponent, AsyncPipe, CustomSearchComponent],
+  imports: [
+    ToggleComponent,
+    ContactGridViewComponent,
+    AsyncPipe,
+    CustomSearchComponent,
+    ContactListViewComponent,
+    MatButton,
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent {
-  private homeService: HomeService = inject(HomeService);
+  homeService: HomeService = inject(HomeService);
   private dialog = inject(MatDialog);
 
   contacts: Observable<Contact[]> = this.homeService.getContacts$();
@@ -56,6 +64,15 @@ export class HomePageComponent {
     modal.componentInstance.modalContent.set('Are you sure you want to delete this contact?');
     modal.componentInstance.submitModal.subscribe(() => {
       this.homeService.deleteContact(contact);
+    });
+  }
+
+  deleteSelectedContacts() {
+    const modal = this.dialog.open(CustomModalComponent);
+    modal.componentInstance.modalTitle.set('Delete Contacts');
+    modal.componentInstance.modalContent.set('Are you sure you want to delete this contact?');
+    modal.componentInstance.submitModal.subscribe(() => {
+      this.homeService.deleteSelectedContacts();
     });
   }
 

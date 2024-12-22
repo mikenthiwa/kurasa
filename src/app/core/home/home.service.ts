@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
 import { contacts } from './mocks/contacts';
@@ -9,6 +9,7 @@ import { Contact } from './models/contact.model';
 })
 export class HomeService {
   contacts: BehaviorSubject<Contact[]> = new BehaviorSubject<Contact[]>(contacts);
+  selectedContacts: WritableSignal<Contact[]> = signal<Contact[]>([]);
   getContacts$(): Observable<Contact[]> {
     return this.contacts.asObservable().pipe(map((contacts) => contacts.filter((c) => !c.isDeleted)));
   }
@@ -36,5 +37,11 @@ export class HomeService {
         )
       )
     );
+  }
+
+  deleteSelectedContacts() {
+    this.selectedContacts().forEach((contact) => {
+      this.deleteContact(contact);
+    });
   }
 }
