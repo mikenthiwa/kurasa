@@ -1,8 +1,19 @@
 <mat-toolbar>
-  <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Phonebook App</span>
+  <div class="flex justify-between w-full items-center">
+    <section>
+      <button mat-icon-button>
+        <mat-icon>contacts</mat-icon>
+      </button>
+      <span>Phonebook App</span>
+    </section>
+
+    <section class="flex items-center">
+      <app-theme-toggle />
+    </section>
+  </div>
+
+
+
 </mat-toolbar>
 
 <section class="p-5">
